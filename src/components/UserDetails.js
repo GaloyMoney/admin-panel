@@ -238,7 +238,7 @@ function UserDetails() {
                   <td>
                     {userDetails.coordinates ? userDetails.coordinates.longitude : ""}
                   </td>
-                  <td>{new Date(parseInt(userDetails.createdAt)).toString()}</td>
+                  <td>{new Date(userDetails.createdAt).toString()}</td>
                   <td>
                     {userDetails.level}{" "}
                     <Button

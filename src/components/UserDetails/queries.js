@@ -1,14 +1,18 @@
 import { gql } from "@apollo/client"
 
 export const GET_USER_BY_PHONE = gql`
-  query getUserDetails($phone: Phone!) {
-    userDetails: userDetailsByPhone(phone: $phone) {
+  query getAccountDetailsByUserPhone($phone: Phone!) {
+    accountDetails: accountDetailsByUserPhone(phone: $phone) {
       id
-      phone
       username
       level
       status
       title
+      owner {
+        id
+        language
+        phone
+      }
       coordinates {
         latitude
         longitude
@@ -19,14 +23,18 @@ export const GET_USER_BY_PHONE = gql`
 `
 
 export const GET_USER_BY_USERNAME = gql`
-  query getUserDetails($username: Username!) {
-    userDetails: userDetailsByUsername(username: $username) {
+  query getAccountDetailsByUsername($username: Username!) {
+    accountDetails: accountDetailsByUsername(username: $username) {
       id
-      phone
       username
       level
       status
       title
+      owner {
+        id
+        language
+        phone
+      }
       coordinates {
         latitude
         longitude

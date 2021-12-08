@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client"
 
-export const GET_USER_BY_PHONE = gql`
+export const GET_ACCOUNT_BY_PHONE = gql`
   query getAccountDetailsByUserPhone($phone: Phone!) {
     accountDetails: accountDetailsByUserPhone(phone: $phone) {
       id
@@ -22,7 +22,7 @@ export const GET_USER_BY_PHONE = gql`
   }
 `
 
-export const GET_USER_BY_USERNAME = gql`
+export const GET_ACCOUNT_BY_USERNAME = gql`
   query getAccountDetailsByUsername($username: Username!) {
     accountDetails: accountDetailsByUsername(username: $username) {
       id
@@ -44,20 +44,24 @@ export const GET_USER_BY_USERNAME = gql`
   }
 `
 
-export const USER_UPDATE_STATUS = gql`
-  mutation userUpdateStatus($input: UserUpdateStatusInput!) {
-    mutationData: userUpdateStatus(input: $input) {
+export const ACCOUNT_UPDATE_STATUS = gql`
+  mutation accountUpdateStatus($input: AccountUpdateStatusInput!) {
+    mutationData: accountUpdateStatus(input: $input) {
       errors {
         message
       }
-      userDetails {
+      accountDetails {
         __typename
         id
-        phone
         username
         level
         status
         title
+        owner {
+          id
+          language
+          phone
+        }
         coordinates {
           latitude
           longitude
@@ -68,19 +72,23 @@ export const USER_UPDATE_STATUS = gql`
   }
 `
 
-export const USER_UPDATE_LEVEL = gql`
-  mutation userUpdateLevel($input: UserUpdateLevelInput!) {
-    mutationData: userUpdateLevel(input: $input) {
+export const ACCOUNT_UPDATE_LEVEL = gql`
+  mutation accountUpdateLevel($input: AccountUpdateLevelInput!) {
+    mutationData: accountUpdateLevel(input: $input) {
       errors {
         message
       }
-      userDetails {
+      accountDetails {
         id
-        phone
         username
         level
         status
         title
+        owner {
+          id
+          language
+          phone
+        }
         coordinates {
           latitude
           longitude
@@ -97,9 +105,13 @@ export const BUSINESS_UPDATE_MAP_INFO = gql`
       errors {
         message
       }
-      userDetails {
+      accountDetails {
         id
-        phone
+        owner {
+          id
+          language
+          phone
+        }
         username
         level
         status

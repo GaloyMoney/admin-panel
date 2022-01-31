@@ -103,7 +103,7 @@ jobs:
           CHART: admin-panel
         run:
           path: meta-release/ci/tasks/prep-release-src.sh
-    - put: edge-image
+    - put: versioned-image
       params:
         image: edge-image/image.tar
         additional_tags: artifacts/gh-release-tag
@@ -217,6 +217,13 @@ resources:
     type: registry-image
     source:
       tag: edge
+      username: #@ data.values.docker_registry_user
+      password: #@ data.values.docker_registry_password
+      repository: #@ admin_panel_image()
+
+  - name: versioned-image
+    type: registry-image
+    source:
       username: #@ data.values.docker_registry_user
       password: #@ data.values.docker_registry_password
       repository: #@ admin_panel_image()

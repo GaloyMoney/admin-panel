@@ -80,7 +80,6 @@ jobs:
         trigger: true
         passed: [ build-edge-image ]
       - get: edge-image
-        trigger: true
         passed: [ build-edge-image ]
         params:
           format: oci
@@ -121,7 +120,6 @@ jobs:
     plan:
       - in_parallel:
           - get: edge-image
-            trigger: true
             passed: [ release ]
             params: { skip_download: true }
           - get: repo

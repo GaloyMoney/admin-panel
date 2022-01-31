@@ -80,6 +80,8 @@ jobs:
         trigger: true
         passed: [ build-edge-image ]
       - get: edge-image
+        trigger: true
+        passed: [ build-edge-image ]
         params:
           format: oci
       - get: meta-release

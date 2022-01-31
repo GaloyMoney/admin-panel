@@ -32,6 +32,7 @@ groups:
   - name: admin-panel
     jobs:
       - build-edge-image
+      - release
       - bump-image-in-chart
 
 jobs:
@@ -181,6 +182,13 @@ resources:
       uri: #@ data.values.meta_release_git_uri
       branch: #@ data.values.meta_release_git_version_branch
       private_key: #@ data.values.github_private_key
+
+  - name: gh-release
+    type: github-release
+    source:
+      owner: #@ data.values.gh_org
+      repository: #@ data.values.gh_repository
+      access_token: #@ data.values.github_token
 
   - name: meta-release
     type: git

@@ -100,8 +100,6 @@ jobs:
         outputs:
         - name: version
         - name: artifacts
-        params:
-          CHART: admin-panel
         run:
           path: pipeline-tasks/ci/tasks/vendor/prep-release-src.sh
     - in_parallel:

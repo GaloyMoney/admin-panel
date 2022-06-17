@@ -17,8 +17,7 @@ function AccountDetails() {
   const [data, setData] = useState(null)
   const [searchValue, setSearchValue] = useState("")
   const onError = (error) => {
-    reportError(error?.graphQLErrors?.[0]?.code +": "+ error.message)
-    //setData(null) leave data as-is
+    reportError(error?.graphQLErrors?.[0]?.code + ": " + error.message)
   }
 
   const queryOptions = {

@@ -17,13 +17,15 @@ function AccountDetails() {
   const [data, setData] = useState(null)
   const [searchValue, setSearchValue] = useState("")
   const onError = (error) => {
-    reportError(error.message)
-    setData(null)
+    reportError(error?.graphQLErrors?.[0]?.code +": "+ error.message)
+    //setData(null) leave data as-is
   }
 
   const queryOptions = {
-    onCompleted({ accountDetails }) {
-      setData(accountDetails)
+    onCompleted(data) {
+      if (data?.accountDetails) {
+        setData(data?.accountDetails)
+      }
     },
     onError,
     fetchPolicy: "no-cache",
@@ -89,10 +91,11 @@ function AccountDetails() {
     if (searchValue && validPhone(searchValue)) {
       return getAccountByUserPhone({ variables: { phone: searchValue } })
     }
-
     if (searchValue && validUsername(searchValue)) {
       return getAccountByUsername({ variables: { username: searchValue } })
     }
+    // invalid search
+    alert("Please enter a full phone number or username")
   }
 
   const changeLevel = () => {

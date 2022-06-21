@@ -17,7 +17,7 @@ const isValidBusinessInfo = ({ title, latitude, longitude }) =>
 
 function BusinessMapUpdate({
   accountDetails,
-  udpate,
+  update,
   updating = false,
   loading = false,
 }) {
@@ -48,7 +48,7 @@ function BusinessMapUpdate({
     }
 
     if (isValidBusinessInfo(businessInfo)) {
-      return udpate && udpate(businessInfo)
+      return update && update(businessInfo)
     }
 
     alert("Invalid business info")
@@ -130,7 +130,7 @@ BusinessMapUpdate.propTypes = {
       longitude: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
   }),
-  udpate: PropTypes.func,
+  update: PropTypes.func,
   updating: PropTypes.bool,
   loading: PropTypes.bool,
 }

@@ -8,7 +8,7 @@ const defaultData = {
 
 function AccountUpdate({
   accountDetails,
-  udpateLevel,
+  updateLevel,
   updateStatus,
   loading = false,
   updatingLevel = false,
@@ -30,7 +30,7 @@ function AccountUpdate({
           {data.level}
           {data.level === "ONE" && (
             <button
-              onClick={udpateLevel}
+              onClick={updateLevel}
               className="text-sm mx-4 bg-green-500 hover:bg-green-700 text-white font-bold p-2 border border-green-700 rounded disabled:opacity-50"
             >
               {updatingLevel ? "Updating..." : "Upgrade"}
@@ -60,7 +60,7 @@ AccountUpdate.propTypes = {
     level: PropTypes.oneOf(["ONE", "TWO"]),
     status: PropTypes.oneOf(["LOCKED", "ACTIVE"]),
   }),
-  udpateLevel: PropTypes.func,
+  updateLevel: PropTypes.func,
   updatingLevel: PropTypes.bool,
   updateStatus: PropTypes.func,
   updatingStatus: PropTypes.bool,

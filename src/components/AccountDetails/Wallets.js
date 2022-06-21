@@ -28,13 +28,13 @@ function Wallets({ accountDetails, update, loading = false, updating = false }) 
       <div className="grid grid-cols-2 gap-4">
         <div>
           <p className="mb-4 font-semibold text-gray-600">BTC Wallet</p>
-          <p className={`text-gray-600 ${emptyClass}`}>ACTIVE</p>
+          <p className={`text-gray-600 ${emptyClass}`}>CREATED</p>
         </div>
         <div>
           <p className="mb-4 font-semibold text-gray-600">USD Wallet</p>
           <p className={`text-gray-600 ${emptyClass}`}>
             {usdWalletActive ? (
-              <span>ACTIVE</span>
+              <span>CREATED</span>
             ) : (
               <button
                 onClick={update}

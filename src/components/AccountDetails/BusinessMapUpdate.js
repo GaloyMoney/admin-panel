@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 
-const isValidLatitud = (latitude) => isFinite(latitude) && Math.abs(latitude) <= 90
+const isValidLatitude = (latitude) => isFinite(latitude) && Math.abs(latitude) <= 90
 const isValidLongitude = (longitude) => isFinite(longitude) && Math.abs(longitude) <= 180
 const isValidTitle = (title) => title.length >= 3
 const isValidBusinessInfo = ({ title, latitude, longitude }) =>
-  isValidLatitud(latitude) && isValidLongitude(longitude) && isValidTitle(title)
+  isValidLatitude(latitude) && isValidLongitude(longitude) && isValidTitle(title)
 
 function BusinessMapUpdate({
   accountDetails,
@@ -59,7 +59,7 @@ function BusinessMapUpdate({
             onChange={(e) => setLatitude(e.target.value)}
             disabled={!!emptyClass}
             className={`${emptyClass} ${
-              !isValidLatitud(latitude) && "border-red-500"
+              !isValidLatitude(latitude) && "border-red-500"
             } mt-4 shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 focus:outline-none focus:shadow-outline`}
           />
         </div>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { formatDate } from "../../utils"
 
 function Details({ accountDetails, loading = false }) {
-  const data = accountDetails 
+  const data = accountDetails
   let emptyClass = loading ? "filter blur-sm animate-pulse" : ""
 
   return (

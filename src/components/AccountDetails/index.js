@@ -152,7 +152,7 @@ function AccountDetails() {
         onChange={setSearchValue}
         onEnter={search}
       />
-      {data &&
+      {data && (
         <>
           <h1 className="mx-6 mt-6 text-2xl font-semibold text-gray-700">
             Account details
@@ -186,7 +186,7 @@ function AccountDetails() {
             </div>
           </div>
         </>
-      }
+      )}
     </>
   )
 }

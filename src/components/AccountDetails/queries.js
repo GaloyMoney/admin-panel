@@ -51,7 +51,7 @@ export const GET_ACCOUNT_BY_USERNAME = gql`
     }
   }
 `
-export const ADD_USD_ACCOUNT = gql`
+export const ADD_USD_WALLET = gql`
   mutation accountsAddUsdWallet($input: AccountsAddUsdWalletInput!) {
     mutationData: accountsAddUsdWallet(input: $input) {
       errors {

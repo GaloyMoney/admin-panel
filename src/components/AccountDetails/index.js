@@ -152,37 +152,41 @@ function AccountDetails() {
         onChange={setSearchValue}
         onEnter={search}
       />
-      <h1 className="mx-6 mt-6 text-2xl font-semibold text-gray-700">
-        Account details
-        {loading && (
-          <small className="animate-pulse font-thin text-sm"> (loading...)</small>
-        )}
-      </h1>
-      <div className="grid gap-6 mb-8 md:grid-cols-2 p-6">
-        <Details accountDetails={data} loading={loading} />
-        <div className="grid grid-cols-1 gap-4">
-          <AccountUpdate
-            accountDetails={data}
-            updateLevel={data && changeLevel}
-            updatingLevel={loadingAccountLevel}
-            updateStatus={data && changeAccountStatus}
-            updatingStatus={loadingAccountStatus}
-            loading={loading}
-          />
-          <Wallets
-            accountDetails={data}
-            update={data && addUsdAccount}
-            updating={loadingUsdStatus}
-            loading={loading}
-          />
-          <BusinessMapUpdate
-            accountDetails={data?.username && data}
-            update={data && changeBusinessMapDetails}
-            updating={loadingBusinessMap}
-            loading={loading}
-          />
-        </div>
-      </div>
+      {data &&
+        <>
+          <h1 className="mx-6 mt-6 text-2xl font-semibold text-gray-700">
+            Account details
+            {loading && (
+              <small className="animate-pulse font-thin text-sm"> (loading...)</small>
+            )}
+          </h1>
+          <div className="grid gap-6 mb-8 md:grid-cols-2 p-6">
+            <Details accountDetails={data} loading={loading} />
+            <div className="grid grid-cols-1 gap-4">
+              <AccountUpdate
+                accountDetails={data}
+                updateLevel={data && changeLevel}
+                updatingLevel={loadingAccountLevel}
+                updateStatus={data && changeAccountStatus}
+                updatingStatus={loadingAccountStatus}
+                loading={loading}
+              />
+              <Wallets
+                accountDetails={data}
+                update={data && addUsdAccount}
+                updating={loadingUsdStatus}
+                loading={loading}
+              />
+              <BusinessMapUpdate
+                accountDetails={data?.username && data}
+                update={data && changeBusinessMapDetails}
+                updating={loadingBusinessMap}
+                loading={loading}
+              />
+            </div>
+          </div>
+        </>
+      }
     </>
   )
 }

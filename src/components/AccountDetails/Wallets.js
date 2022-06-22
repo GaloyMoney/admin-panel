@@ -1,27 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const defaultData = {
-  owner: {
-    phone: "+11111111111",
-  },
-  username: "username",
-  level: "ONE",
-  status: "ACTIVE",
-  title: "title",
-  coordinates: {
-    latitude: "13.4972747",
-    longitude: "-89.4435569",
-  },
-  createdAt: 1633992340,
-}
-
 function Wallets({ accountDetails, update, loading = false, updating = false }) {
-  const data = accountDetails || defaultData
   const usdWalletActive = accountDetails?.wallets?.some((e) => e.walletCurrency === "USD")
-  let emptyClass =
-    data.username === defaultData.username || loading ? "filter blur-sm" : ""
-  emptyClass = emptyClass + (loading ? " animate-pulse" : "")
+  let emptyClass = loading ? "filter blur-sm animate-pulse" : ""
 
   return (
     <div className="shadow p-6 min-w-0 rounded-lg shadow-xs overflow-hidden bg-white">

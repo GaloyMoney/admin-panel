@@ -11,7 +11,7 @@ import {
   ACCOUNT_UPDATE_STATUS,
   ACCOUNT_UPDATE_LEVEL,
   BUSINESS_UPDATE_MAP_INFO,
-  ADD_USD_ACCOUNT,
+  ADD_USD_WALLET,
 } from "./queries"
 import { validPhone, validUsername, reportError } from "../../utils"
 
@@ -56,7 +56,7 @@ function AccountDetails() {
     },
   )
 
-  const [updateUsdAccount, { loading: loadingUsdStatus }] = useMutation(ADD_USD_ACCOUNT, {
+  const [updateUsdWallet, { loading: loadingUsdStatus }] = useMutation(ADD_USD_WALLET, {
     onCompleted() {
       alert(`USD wallet activated successfully`)
       // refresh the data via search
@@ -125,12 +125,12 @@ function AccountDetails() {
     }
   }
 
-  const addUsdAccount = () => {
+  const addUsdWallet = () => {
     const confirmation = window.confirm(
       `Clicking OK will add a USD wallet to ${data.phone}'s account. This action cannot be reversed. Do you wish to proceed?`,
     )
     if (confirmation) {
-      updateUsdAccount({
+      updateUsdWallet({
         variables: { input: { accountIds: [data.id] } },
       })
     }
@@ -173,7 +173,7 @@ function AccountDetails() {
               />
               <Wallets
                 accountDetails={data}
-                update={data && addUsdAccount}
+                update={data && addUsdWallet}
                 updating={loadingUsdStatus}
                 loading={loading}
               />

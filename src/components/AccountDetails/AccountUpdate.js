@@ -1,11 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const defaultData = {
-  level: "ONE",
-  status: "ACTIVE",
-}
-
 function AccountUpdate({
   accountDetails,
   updateLevel,
@@ -14,12 +9,11 @@ function AccountUpdate({
   updatingLevel = false,
   updatingStatus = false,
 }) {
-  const data = accountDetails || defaultData
+  const data = accountDetails
 
-  let emptyClass = data === defaultData || loading ? "filter blur-sm" : ""
-  emptyClass = emptyClass + (loading ? " animate-pulse" : "")
+  let emptyClass = loading ? "filter blur-sm animate-pulse" : ""
 
-  const isActiveStatus = data.status === "ACTIVE"
+  const isActiveStatus = data?.status === "ACTIVE"
   const statusColor = isActiveStatus ? "red" : "green"
   const statusButtonLabel = isActiveStatus ? "Lock" : "Activate"
   return (
@@ -27,8 +21,8 @@ function AccountUpdate({
       <div>
         <p className="mb-4 font-semibold text-gray-600">Level</p>
         <p className={`text-gray-600 ${emptyClass}`}>
-          {data.level}
-          {data.level === "ONE" && (
+          {data?.level}
+          {data?.level === "ONE" && (
             <button
               onClick={updateLevel}
               className="text-sm mx-4 bg-green-500 hover:bg-green-700 text-white font-bold p-2 border border-green-700 rounded disabled:opacity-50"
@@ -41,7 +35,7 @@ function AccountUpdate({
       <div>
         <p className="mb-4 font-semibold text-gray-600">Status</p>
         <p className={`text-gray-600 ${emptyClass}`}>
-          {data.status}
+          {data?.status}
           <button
             onClick={updateStatus}
             disabled={updatingStatus}

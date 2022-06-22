@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 
-const defaultData = {
-  title: "",
-  coordinates: {
-    latitude: "",
-    longitude: "",
-  },
-}
-
 const isValidLatitud = (latitude) => isFinite(latitude) && Math.abs(latitude) <= 90
 const isValidLongitude = (longitude) => isFinite(longitude) && Math.abs(longitude) <= 180
 const isValidTitle = (title) => title.length >= 3
@@ -21,21 +13,18 @@ function BusinessMapUpdate({
   updating = false,
   loading = false,
 }) {
-  const data = accountDetails || defaultData
-  data.title = data.title || defaultData.title
-  data.coordinates = data.coordinates || defaultData.coordinates
+  const data = accountDetails
 
-  const [title, setTitle] = useState(data.title)
-  const [latitude, setLatitude] = useState(data.coordinates.latitude)
-  const [longitude, setLongitude] = useState(data.coordinates.longitude)
+  const [title, setTitle] = useState(data?.title || "")
+  const [latitude, setLatitude] = useState(data?.coordinates?.latitude || "")
+  const [longitude, setLongitude] = useState(data?.coordinates?.longitude || "")
 
-  let emptyClass = data === defaultData || loading ? "filter blur-sm" : ""
-  emptyClass = emptyClass + (loading ? " animate-pulse" : "")
+  let emptyClass = loading ? "filter blur-sm animate-pulse" : ""
 
   useEffect(() => {
-    setTitle(data.title)
-    setLatitude(data.coordinates.latitude)
-    setLongitude(data.coordinates.longitude)
+    setTitle(data?.title || "")
+    setLatitude(data?.coordinates?.latitude || "")
+    setLongitude(data?.coordinates?.longitude || "")
   }, [data])
 
   const submit = async (event) => {

@@ -59,7 +59,7 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^3.9.2",
-    "eslint-webpack-plugin": "^2.5.2",
+    "eslint-webpack-plugin": "^2.7.0",
     "prettier": "^2.3.2",
     "file-loader": "6.2.0",
     "sass-loader": "^10.0.5",

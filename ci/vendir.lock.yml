@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'fix: audit_return was not accurate'
-      sha: bb69fa04f570029da37e13f0105298c1309d6807
+      commitTitle: 'fix: do not exit early when audit fails'
+      sha: 799bfec8dccc06bb65f95da1f924a3f4a0e6f997
     path: .
   path: vendor
 kind: LockConfig

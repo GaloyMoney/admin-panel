@@ -78,7 +78,7 @@
     "pnp-webpack-plugin": "1.7.0",
     "terser-webpack-plugin": "4.2.3",
     "mini-css-extract-plugin": "0.11.3",
-    "css-loader": "4.3.0",
+    "css-loader": "5.2.7",
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-loader": "3.0.0",
     "postcss-normalize": "8.0.1",

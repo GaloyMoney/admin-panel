@@ -7,7 +7,7 @@
     "eslint-fix": "eslint \"src/**/*.js\" --fix",
     "prettier-check": "prettier --check .",
     "prettier-write": "prettier --write .",
-    "check-code": "yarn eslint-check && yarn prettier-check && yarn test --watchAll=false",
+    "check-code": "yarn eslint-check && yarn prettier-check",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"

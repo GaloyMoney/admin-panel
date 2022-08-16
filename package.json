@@ -19,7 +19,7 @@
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
     "fs-extra": "^9.0.1",
-    "graphql": "^16.3.0",
+    "graphql": "^16.6.0",
     "hookrouter": "^1.2.5",
     "identity-obj-proxy": "3.0.0",
     "prompts": "2.4.2",

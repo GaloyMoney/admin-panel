@@ -14,6 +14,9 @@ const cache = new InMemoryCache()
 const httpLink = new HttpLink({ uri: GRAPHQL_URI, fetch })
 
 const authLink = setContext((_, { headers }) => {
+  if (typeof window === "undefined") {
+    return headers
+  }
   const token = window.sessionStorage.getItem("token")
   return {
     headers: {

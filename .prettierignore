@@ -1,9 +1,5 @@
-coverage
-lib
-tmp
-charts
+.next
 .vscode
 
-**/*.yaml
-**/*.yml
-**/*.md
+.github
+ci/vendor

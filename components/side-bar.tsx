@@ -14,7 +14,7 @@ function SideBar() {
   return (
     <aside className="z-30 flex-shrink-0 hidden w-64 overflow-y-auto bg-white lg:block">
       <div className="py-4 text-gray-500">
-        <Link className="ml-6 text-lg font-bold text-gray-800" href="/acccount">
+        <Link className="ml-6 text-lg font-bold text-gray-800" href="/account">
           <Image
             src="/logo.png"
             alt="Bitcoin Beach logo"

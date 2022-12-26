@@ -26,39 +26,39 @@
 #@   "slack_resource_type")
 
 groups:
-- name: admin-panel
-  jobs:
-    - audit
-    - install-deps
-    - check-code
-    - build-edge-image
-    - release
-    - bump-image-in-chart
+  - name: admin-panel
+    jobs:
+      - audit
+      - install-deps
+      - check-code
+      - build-edge-image
+      - release
+      - bump-image-in-chart
 
 jobs:
-- #@ install_yarn_deps()
-- #@ nodejs_check_code()
-- #@ nodejs_audit()
-- #@ build_edge_image()
-- #@ release()
-- #@ open_charts_pr()
+  -  #@ install_yarn_deps()
+  -  #@ nodejs_check_code()
+  -  #@ nodejs_audit()
+  -  #@ build_edge_image()
+  -  #@ release()
+  -  #@ open_charts_pr()
 
 resources:
-- #@ repo_resource()
-- #@ pipeline_tasks_resource()
-- #@ edge_image_resource()
-- #@ nodejs_deps_resource()
-- #@ deps_version_resource()
-- #@ bundled_deps_resource()
-- #@ slack_resource()
+  -  #@ repo_resource()
+  -  #@ pipeline_tasks_resource()
+  -  #@ edge_image_resource()
+  -  #@ nodejs_deps_resource()
+  -  #@ deps_version_resource()
+  -  #@ bundled_deps_resource()
+  -  #@ slack_resource()
 
-- #@ version_resource()
-- #@ charts_repo_resource()
-- #@ versioned_image_resource()
+  -  #@ version_resource()
+  -  #@ charts_repo_resource()
+  -  #@ versioned_image_resource()
 
-- #@ gh_release_resource()
-- #@ charts_repo_bot_branch()
+  -  #@ gh_release_resource()
+  -  #@ charts_repo_bot_branch()
 
 resource_types:
-- #@ gcr_resource_type()
-- #@ slack_resource_type()
+  -  #@ gcr_resource_type()
+  -  #@ slack_resource_type()

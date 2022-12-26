@@ -1,7 +1,10 @@
-let GRAPHQL_URI = process.env.NEXT_PUBLIC_GRAPHQL_URL
-
 const config = () => {
+  let GRAPHQL_URI = process.env.NEXT_PUBLIC_GRAPHQL_URL
+
   if (!GRAPHQL_URI) {
+    if (typeof window === "undefined") {
+      return {}
+    }
     const hostParts = window.location.host.split(".")
     if (hostParts.length <= 3) {
       throw new Error("Missing env variables")

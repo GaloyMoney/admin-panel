@@ -22,14 +22,14 @@ describe("config", () => {
 
   it("uses process.env if that's set", () => {
     process.env.NEXT_PUBLIC_GRAPHQL_URL = "test.url"
-    const { GRAPHQL_URI } = config()
-    expect(GRAPHQL_URI).toBe("test.url")
+    const { GRAPHQL_URL } = config()
+    expect(GRAPHQL_URL).toBe("test.url")
   })
 
   it("uses window.location if no variable is set in process.env", () => {
     process.env.NEXT_PUBLIC_GRAPHQL_URL = undefined
-    const { GRAPHQL_URI } = config()
-    expect(GRAPHQL_URI).toBe("https://admin-api.xyz.example.com/graphql")
+    const { GRAPHQL_URL } = config()
+    expect(GRAPHQL_URL).toBe("https://admin-api.xyz.example.com/graphql")
   })
 
   it("works only for a.b.c.d domains", () => {

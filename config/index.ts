@@ -1,7 +1,7 @@
 const config = () => {
-  let GRAPHQL_URI = process.env.NEXT_PUBLIC_GRAPHQL_URL
+  let GRAPHQL_URL = process.env.NEXT_PUBLIC_GRAPHQL_URL
 
-  if (!GRAPHQL_URI) {
+  if (!GRAPHQL_URL) {
     if (typeof window === "undefined") {
       return {}
     }
@@ -10,10 +10,10 @@ const config = () => {
       throw new Error("Missing env variables")
     }
     hostParts[0] = "admin-api"
-    GRAPHQL_URI = `https://${hostParts.join(".")}/graphql`
+    GRAPHQL_URL = `https://${hostParts.join(".")}/graphql`
   }
   return {
-    GRAPHQL_URI,
+    GRAPHQL_URL,
   }
 }
 

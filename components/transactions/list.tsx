@@ -1,11 +1,43 @@
 "use client"
 
+import { TransactionListType } from "."
 import { formatDate, formatNumber } from "../../utils"
 
-// FIXME: use types from graphql schema
 type Props = {
-  transactions: unknown[]
+  transactions: TransactionListType
   loading: boolean
+}
+
+const hashOrCounterParty = (txn: TransactionListType[number]) => {
+  if (
+    txn.settlementVia.__typename === "SettlementViaOnChain" &&
+    txn.settlementVia.transactionHash
+  ) {
+    return (
+      <a
+        target="_blank"
+        rel="noreferrer"
+        className="underline"
+        href={`https://mempool.space/tx/${txn.settlementVia.transactionHash}`}
+      >
+        {txn.settlementVia.transactionHash}
+      </a>
+    )
+  }
+
+  if (txn.initiationVia.__typename === "InitiationViaLn") {
+    return txn.initiationVia.paymentHash
+  }
+
+  if (txn.settlementVia.__typename === "SettlementViaIntraLedger") {
+    return (
+      txn.settlementVia.counterPartyUsername ||
+      txn.settlementVia.counterPartyWalletId ||
+      "--"
+    )
+  }
+
+  return "--"
 }
 
 const Transactions: React.FC<Props> = ({ transactions, loading = false }) => {
@@ -28,7 +60,7 @@ const Transactions: React.FC<Props> = ({ transactions, loading = false }) => {
   const isInternalTx =
     hasData &&
     transactions.every(
-      (t: any) => t.initiationVia.__typename === "InitiationViaIntraLedger",
+      (txn) => txn?.initiationVia.__typename === "InitiationViaIntraLedger",
     )
   return (
     <div className="shadow w-full overflow-hidden rounded-lg shadow-xs">
@@ -51,37 +83,25 @@ const Transactions: React.FC<Props> = ({ transactions, loading = false }) => {
           </thead>
           <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
             {hasData &&
-              transactions.map((tx: any) => (
-                <tr key={tx.id} className="text-gray-700 dark:text-gray-400">
-                  <td className="px-4 py-3">{tx.id}</td>
-                  <td className="px-4 py-3">{mapViaType(tx.initiationVia.__typename)}</td>
-                  <td className="px-4 py-3">{mapViaType(tx.settlementVia.__typename)}</td>
-                  <td className="px-4 py-3">{formatNumber(tx.settlementAmount)}</td>
-                  <td className="px-4 py-3">{formatNumber(tx.settlementFee)}</td>
+              transactions.map((txn) => (
+                <tr key={txn.id} className="text-gray-700 dark:text-gray-400">
+                  <td className="px-4 py-3">{txn.id}</td>
                   <td className="px-4 py-3">
-                    {formatNumber(tx.settlementPrice.formattedAmount)}
+                    {mapViaType(txn.initiationVia.__typename)}
                   </td>
-                  <td className="px-4 py-3">{tx.direction}</td>
-                  <td className="px-4 py-3">{tx.status}</td>
-                  <td className="px-4 py-3 break-all">{tx.memo}</td>
-                  <td className="px-4 py-3 break-all">
-                    {tx.settlementVia.transactionHash ? (
-                      <a
-                        target="_blank"
-                        rel="noreferrer"
-                        className="underline"
-                        href={`https://mempool.space/tx/${tx.settlementVia.transactionHash}`}
-                      >
-                        {tx.settlementVia.transactionHash}
-                      </a>
-                    ) : (
-                      tx.initiationVia.paymentHash ||
-                      tx.settlementVia.counterPartyUsername ||
-                      tx.settlementVia.counterPartyWalletId ||
-                      "--"
-                    )}
+                  <td className="px-4 py-3">
+                    {mapViaType(txn.settlementVia.__typename)}
                   </td>
-                  <td className="px-4 py-3">{formatDate(tx.createdAt)}</td>
+                  <td className="px-4 py-3">{formatNumber(txn.settlementAmount)}</td>
+                  <td className="px-4 py-3">{formatNumber(txn.settlementFee)}</td>
+                  <td className="px-4 py-3">
+                    {formatNumber(txn.settlementPrice.formattedAmount)}
+                  </td>
+                  <td className="px-4 py-3">{txn.direction}</td>
+                  <td className="px-4 py-3">{txn.status}</td>
+                  <td className="px-4 py-3 break-all">{txn.memo}</td>
+                  <td className="px-4 py-3 break-all">{hashOrCounterParty(txn)}</td>
+                  <td className="px-4 py-3">{formatDate(txn.createdAt)}</td>
                 </tr>
               ))}
             {!hasData && (

@@ -4,10 +4,14 @@ import { useState } from "react"
 
 import { validPhone } from "../utils"
 
-export default function PhoneNumberForm({ onSuccess }: any) {
+type Props = {
+  onSuccess: (phone: string) => void
+}
+
+const PhoneNumberForm: React.FC<Props> = ({ onSuccess }) => {
   const [phone, setPhone] = useState("")
 
-  async function submitPhone(event: any) {
+  const submitPhone: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
     onSuccess(phone)
   }
@@ -37,3 +41,5 @@ export default function PhoneNumberForm({ onSuccess }: any) {
     </form>
   )
 }
+
+export default PhoneNumberForm

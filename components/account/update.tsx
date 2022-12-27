@@ -1,10 +1,9 @@
 "use client"
 
+import { AccountData } from "./index"
+
 type PropType = {
-  accountDetails: {
-    level: "ONE" | "TWO"
-    status: "LOCKED" | "ACTIVE"
-  }
+  accountDetails: AccountData
   updateLevel: () => void
   updatingLevel: boolean
   updateStatus: () => void
@@ -22,7 +21,7 @@ const AccountUpdate: React.FC<PropType> = ({
 }) => {
   const data = accountDetails
 
-  let emptyClass = loading ? "filter blur-sm animate-pulse" : ""
+  const emptyClass = loading ? "filter blur-sm animate-pulse" : ""
 
   const isActiveStatus = data?.status === "ACTIVE"
   const statusColor = isActiveStatus ? "red" : "green"

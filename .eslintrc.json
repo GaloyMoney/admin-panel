@@ -5,5 +5,5 @@
     "jest": true,
     "node": true
   },
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"]
 }

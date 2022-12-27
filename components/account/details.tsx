@@ -1,26 +1,14 @@
 "use client"
 
+import { AccountData } from "./index"
 import { formatDate } from "../../utils"
 
-type AccountDetails = {
-  title: string
-  username: string
-  owner: {
-    phone: string
-  }
-  createdAt: string
-  coordinates: {
-    latitude: number | ""
-    longitude: number | ""
-  }
-}
-
 const Details: React.FC<{
-  accountDetails: AccountDetails
+  accountDetails: AccountData
   loading?: boolean
 }> = ({ accountDetails, loading = false }) => {
   const data = accountDetails
-  let emptyClass = loading ? "filter blur-sm animate-pulse" : ""
+  const emptyClass = loading ? "filter blur-sm animate-pulse" : ""
 
   return (
     <div className="shadow p-6 min-w-0 rounded-lg shadow-xs overflow-hidden bg-white grid grid-cols-2 gap-4">

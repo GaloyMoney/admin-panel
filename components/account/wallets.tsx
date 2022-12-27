@@ -1,10 +1,9 @@
 "use client"
 
-// FIXME: use types from graphql schema
+import { AccountData } from "./"
+
 type Props = {
-  accountDetails: {
-    wallets: unknown[]
-  }
+  accountDetails: AccountData
   update: () => void
   updating: boolean
   loading: boolean
@@ -16,10 +15,8 @@ const Wallets: React.FC<Props> = ({
   loading = false,
   updating = false,
 }) => {
-  const usdWalletActive = accountDetails?.wallets?.some(
-    (e: any) => e.walletCurrency === "USD",
-  )
-  let emptyClass = loading ? "filter blur-sm animate-pulse" : ""
+  const usdWalletActive = accountDetails?.wallets?.some((e) => e.walletCurrency === "USD")
+  const emptyClass = loading ? "filter blur-sm animate-pulse" : ""
 
   return (
     <div className="shadow p-6 min-w-0 rounded-lg shadow-xs overflow-hidden bg-white">

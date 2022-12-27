@@ -8,7 +8,7 @@ import CaptchaChallenge from "./captcha-challenge"
 import Image from "next/image"
 
 export default function Login() {
-  const [phoneNumber, setPhoneNumber] = useState()
+  const [phoneNumber, setPhoneNumber] = useState<string>()
 
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50">

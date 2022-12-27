@@ -1,17 +1,17 @@
 import Head from "next/head"
+import type { AppProps } from "next/app"
 
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from "@apollo/client"
-
 import { setContext } from "@apollo/client/link/context"
 
 import config from "../config"
 
 import "../styles/main.css"
 
-const { GRAPHQL_URI } = config()
+const { GRAPHQL_URL } = config()
 
 const cache = new InMemoryCache()
-const httpLink = new HttpLink({ uri: GRAPHQL_URI, fetch })
+const httpLink = new HttpLink({ uri: GRAPHQL_URL, fetch })
 
 const authLink = setContext((_, { headers }) => {
   if (typeof window === "undefined") {
@@ -31,7 +31,7 @@ const client = new ApolloClient({
   cache,
 })
 
-function MyApp({ Component, pageProps }: any) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>

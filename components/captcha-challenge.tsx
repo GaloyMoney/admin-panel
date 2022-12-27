@@ -1,36 +1,14 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
-import { gql, useMutation } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 
 import AuthCodeForm from "./auth-code-form"
+import { CAPTCHA_CREATE_CHALLENGE, CAPTCHA_REQUEST_AUTH_CODE } from "../graphql/mutations"
 
-const CAPTCHA_CREATE_CHALLENGE = gql`
-  mutation captchaCreateChallenge {
-    captchaCreateChallenge {
-      errors {
-        message
-      }
-      result {
-        id
-        challengeCode
-        newCaptcha
-        failbackMode
-      }
-    }
-  }
-`
-
-const CAPTCHA_REQUEST_AUTH_CODE = gql`
-  mutation captchaRequestAuthCode($input: CaptchaRequestAuthCodeInput!) {
-    captchaRequestAuthCode(input: $input) {
-      errors {
-        message
-      }
-      success
-    }
-  }
-`
+type GraphQLError = {
+  message: string
+}
 
 const CaptchaChallenge: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) => {
   const [createCaptchaChallenge, { loading: createLoading }] = useMutation(
@@ -40,9 +18,13 @@ const CaptchaChallenge: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) =>
     CAPTCHA_REQUEST_AUTH_CODE,
   )
 
-  const [captchaState, setCaptchaState] = useState<any>({ status: "loading" })
+  const [captchaState, setCaptchaState] = useState<{
+    status: "loading" | "error" | "ready" | "success"
+    errorsMessage?: string
+  }>({ status: "loading" })
 
   const captchaHandler = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (captchaObj: any) => {
       const onSuccess = async () => {
         const result = captchaObj.getValidate()
@@ -64,7 +46,7 @@ const CaptchaChallenge: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) =>
 
           setCaptchaState({
             status: data?.captchaRequestAuthCode?.success ? "success" : "error",
-            errorsMessage: gqlErrors?.map((err: any) => err.message).join(","),
+            errorsMessage: gqlErrors?.map((err: GraphQLError) => err.message).join(","),
           })
         } catch (error) {
           console.debug("[Captcha error]:", error)
@@ -100,17 +82,18 @@ const CaptchaChallenge: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) =>
 
         const gqlErrors = errors ?? data?.captchaCreateChallenge?.errors
 
-        if (gqlErrors.length > 0) {
+        if (gqlErrors && gqlErrors.length > 0) {
           setCaptchaState({
             status: "error",
-            errorsMessage: gqlErrors?.map((err: any) => err.message).join(","),
+            errorsMessage: gqlErrors?.map((err: GraphQLError) => err.message).join(","),
           })
         }
 
         const result = data?.captchaCreateChallenge?.result
 
         if (result) {
-          const { id, challengeCode, newCaptcha, failbackMode } = result as any
+          const { id, challengeCode, newCaptcha, failbackMode } = result
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(window as any).initGeetest(
             {
               gt: id,

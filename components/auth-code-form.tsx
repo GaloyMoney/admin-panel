@@ -1,28 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { gql, useMutation } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 
 import { validAuthCode, reportError } from "../utils"
 import { useRouter } from "next/navigation"
-
-const LOGIN = gql`
-  mutation login($input: UserLoginInput!) {
-    mutationData: userLogin(input: $input) {
-      errors {
-        message
-      }
-      authToken
-    }
-  }
-`
+import { LOGIN } from "../graphql/mutations"
 
 const AuthCodeForm: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) => {
   const router = useRouter()
   const [otp, setOtp] = useState("")
   const [login, { loading: userLoginLoading }] = useMutation(LOGIN)
 
-  async function submitOtp(event: any) {
+  const submitOtp: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
 
     const { errors: loginErrors, data } = await login({
@@ -30,20 +20,22 @@ const AuthCodeForm: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) => {
     })
 
     if (loginErrors) {
-      return reportError(loginErrors.join(","))
+      return reportError(loginErrors[0])
     }
 
-    const { errors, authToken } = data.mutationData
+    if (data?.userLogin) {
+      const { errors, authToken } = data.userLogin
 
-    if (errors.length > 0) {
-      return reportError(errors[0].message)
-    }
+      if (errors.length > 0) {
+        return reportError(errors[0])
+      }
 
-    if (authToken) {
-      window.sessionStorage.setItem("token", authToken)
-      router.push("/account")
-    } else {
-      reportError("Could not execute operation")
+      if (authToken) {
+        window.sessionStorage.setItem("token", authToken)
+        router.push("/account")
+      } else {
+        alert("Could not execute operation")
+      }
     }
   }
 

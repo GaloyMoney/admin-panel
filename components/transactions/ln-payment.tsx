@@ -1,9 +1,10 @@
 "use client"
 
+import { LightningPayment, LnPaymentStatus } from "../../graphql/types"
 import { formatDate } from "../../utils"
 
-const emptyPayment = {
-  status: "PENDING",
+const emptyPayment: LightningPayment = {
+  status: LnPaymentStatus.Pending,
   amount: 0,
   roundedUpFee: 0,
   createdAt: 0,
@@ -14,16 +15,7 @@ const emptyPayment = {
 }
 
 type Props = {
-  payment: {
-    status: string
-    amount: number
-    roundedUpFee: number
-    createdAt: number
-    confirmedAt?: number
-    request?: string
-    destination: string
-    revealedPreImage: string
-  }
+  payment: LightningPayment
   loading: boolean
 }
 

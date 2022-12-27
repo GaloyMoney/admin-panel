@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useLazyQuery } from "@apollo/client"
+import { ApolloError, useLazyQuery } from "@apollo/client"
 
 import Login from "../login"
 import { isAuthenticated } from "../../utils"
@@ -11,90 +11,121 @@ import SearchHeader from "../search-header"
 import TransactionList from "./list"
 import LnPayment from "./ln-payment"
 import LnInvoice from "./ln-invoice"
-import {
-  GET_TRANSACTIONS_BY_HASH,
-  GET_TRANSACTION_BY_ID,
-  GET_LNPAYMENT_BY_HASH,
-  GET_LNINVOICE_BY_HASH,
-} from "./queries"
+
 import { reportError } from "../../utils"
+import {
+  LIGHTNING_INVOICE,
+  LIGHTNING_PAYMENT,
+  TRANSACTIONS_BY_HASH,
+  TRANSACTION_BY_ID,
+} from "../../graphql/queries"
+import {
+  LightningInvoice,
+  LightningPayment,
+  TransactionByIdQuery,
+  TransactionsByHashQuery,
+} from "../../graphql/types"
+
+export type TransactionListType =
+  | TransactionsByHashQuery["transactionsByHash"]
+  | Array<TransactionByIdQuery["transactionById"]>
 
 const isValidHash = (hash: string) => hash && hash.match(/^[a-f0-9]{64}$/i)
 const isValidTxId = (id: string) => id && id.match(/^[0-9a-fA-F]{24}$/i)
 
 function TransactionDetails() {
-  const [data, setData] = useState<any>(null)
-  const [payment, setPayment] = useState(null)
-  const [invoice, setInvoice] = useState(null)
+  const [data, setData] = useState<null | TransactionListType>(null)
+  const [payment, setPayment] = useState<null | LightningPayment>(null)
+  const [invoice, setInvoice] = useState<null | LightningInvoice>(null)
   const [searchValue, setSearchValue] = useState("")
 
-  const queryOptions = {
-    onCompleted({ transactions, transaction }: any) {
-      let txs: any = transaction ? [transaction] : null
-      txs = txs || transactions || []
+  const handleTxnsData = (txns: TransactionListType) => {
+    setData(txns)
+    const txn = txns.find(
+      (txn) =>
+        txn?.initiationVia.__typename !== "InitiationViaIntraLedger" &&
+        txn?.settlementVia.__typename !== "SettlementViaIntraLedger",
+    )
 
-      setPayment(null)
-      setInvoice(null)
-      setData(txs)
+    const paymentHash =
+      txn?.initiationVia?.__typename === "InitiationViaLn" &&
+      txn?.initiationVia?.paymentHash
+    const transactionHash =
+      txn?.settlementVia?.__typename === "SettlementViaOnChain" &&
+      txn?.settlementVia?.transactionHash
 
-      const tx = txs.find(
-        (t: any) =>
-          t.initiationVia.__typename !== "InitiationViaIntraLedger" &&
-          t.settlementVia.__typename !== "SettlementViaIntraLedger",
-      )
-      const hash =
-        tx && (tx.initiationVia.paymentHash || tx.settlementVia.transactionHash)
-      if (hash) {
-        getLnPayment({ variables: { hash } })
-        getLnInvoice({ variables: { hash } })
-      }
-    },
-    onError(error: any) {
-      reportError(error.message)
-      setData(null)
-      setPayment(null)
-      setInvoice(null)
-    },
-    // fetchPolicy: "cache-and-network",
+    const hash = paymentHash ?? transactionHash
+
+    if (hash) {
+      getLnPayment({ variables: { hash } })
+      getLnInvoice({ variables: { hash } })
+    }
+  }
+
+  const onTxnsError = (error: ApolloError) => {
+    reportError(error)
+    setData(null)
+    setPayment(null)
+    setInvoice(null)
   }
 
   const [getTransactionsByHash, { loading: loadingTransactionsByHash }] = useLazyQuery(
-    GET_TRANSACTIONS_BY_HASH,
-    queryOptions,
+    TRANSACTIONS_BY_HASH,
+    {
+      onCompleted({ transactionsByHash }) {
+        setPayment(null)
+        setInvoice(null)
+
+        if (!transactionsByHash) {
+          return
+        }
+
+        handleTxnsData(transactionsByHash)
+      },
+      onError: onTxnsError,
+      fetchPolicy: "cache-and-network",
+    },
   )
 
   const [getTransactionById, { loading: loadingTransactionById }] = useLazyQuery(
-    GET_TRANSACTION_BY_ID,
-    queryOptions,
-  )
-
-  const [getLnPayment, { loading: loadingLnPayment }] = useLazyQuery(
-    GET_LNPAYMENT_BY_HASH,
+    TRANSACTION_BY_ID,
     {
-      onCompleted({ payment }) {
-        setPayment(payment)
-      },
-      onError(error) {
-        console.warn(error.message)
+      onCompleted({ transactionById }) {
         setPayment(null)
+        setInvoice(null)
+
+        if (!transactionById) {
+          return
+        }
+
+        handleTxnsData([transactionById])
       },
+      onError: onTxnsError,
       fetchPolicy: "cache-and-network",
     },
   )
 
-  const [getLnInvoice, { loading: loadingLnInvoice }] = useLazyQuery(
-    GET_LNINVOICE_BY_HASH,
-    {
-      onCompleted({ invoice }) {
-        setInvoice(invoice)
-      },
-      onError(error) {
-        console.warn(error.message)
-        setInvoice(null)
-      },
-      fetchPolicy: "cache-and-network",
+  const [getLnPayment, { loading: loadingLnPayment }] = useLazyQuery(LIGHTNING_PAYMENT, {
+    onCompleted({ lightningPayment }) {
+      setPayment(lightningPayment)
     },
-  )
+    onError(error) {
+      console.warn(error.message)
+      setPayment(null)
+    },
+    fetchPolicy: "cache-and-network",
+  })
+
+  const [getLnInvoice, { loading: loadingLnInvoice }] = useLazyQuery(LIGHTNING_INVOICE, {
+    onCompleted({ lightningInvoice }) {
+      setInvoice(lightningInvoice)
+    },
+    onError(error) {
+      console.warn(error.message)
+      setInvoice(null)
+    },
+    fetchPolicy: "cache-and-network",
+  })
 
   const search = () => {
     setData(null)
@@ -131,7 +162,7 @@ function TransactionDetails() {
         )}
       </h1>
       <div className="grid gap-6 mb-8 md:grid-cols-1 p-6">
-        <TransactionList transactions={data} loading={loading} />
+        {data && <TransactionList transactions={data} loading={loading} />}
         {payment && (
           <>
             <h2 className="text-xl font-semibold text-gray-700">Payment</h2>

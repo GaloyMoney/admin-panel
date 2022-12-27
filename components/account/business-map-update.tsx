@@ -1,40 +1,21 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { AccountBusinessInfo, AccountData } from "./index"
 
 const isValidLatitude = (latitude: number) =>
   isFinite(latitude) && Math.abs(latitude) <= 90
 const isValidLongitude = (longitude: number) =>
   isFinite(longitude) && Math.abs(longitude) <= 180
 const isValidTitle = (title: string) => title.length >= 3
-const isValidBusinessInfo = ({
-  title,
-  latitude,
-  longitude,
-}: {
-  title: string
-  latitude: number
-  longitude: number
-}) => isValidLatitude(latitude) && isValidLongitude(longitude) && isValidTitle(title)
-
-// FIXME: Combine types
-type AccountDetails = {
-  title: string
-  coordinates: {
-    latitude: number | ""
-    longitude: number | ""
-  }
-}
-
-type AccountInfo = {
-  title: string
-  longitude: number | ""
-  latitude: number | ""
-}
+const isValidBusinessInfo = ({ title, coordinates }: AccountBusinessInfo) =>
+  isValidLatitude(coordinates.latitude) &&
+  isValidLongitude(coordinates.longitude) &&
+  isValidTitle(title)
 
 const BusinessMapUpdate: React.FC<{
-  accountDetails: AccountDetails
-  update: (info: AccountInfo) => void
+  accountDetails: AccountData
+  update: (info: AccountBusinessInfo) => void
   updating: boolean
   loading: boolean
 }> = ({ accountDetails, update, updating = false, loading = false }) => {
@@ -46,7 +27,7 @@ const BusinessMapUpdate: React.FC<{
     data?.coordinates?.longitude || "",
   )
 
-  let emptyClass = loading ? "filter blur-sm animate-pulse" : ""
+  const emptyClass = loading ? "filter blur-sm animate-pulse" : ""
 
   useEffect(() => {
     setTitle(data?.title || "")
@@ -54,17 +35,20 @@ const BusinessMapUpdate: React.FC<{
     setLongitude(data?.coordinates?.longitude || "")
   }, [data])
 
-  const submit = async (event: any) => {
+  const submit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
 
     const businessInfo = {
       title,
-      longitude: Number(longitude),
-      latitude: Number(latitude),
+      coordinates: {
+        latitude: Number(latitude),
+        longitude: Number(longitude),
+      },
     }
 
-    if (isValidBusinessInfo(businessInfo)) {
-      return update && update(businessInfo)
+    if (update && isValidBusinessInfo(businessInfo)) {
+      update(businessInfo)
+      return
     }
 
     alert("Invalid business info")
@@ -131,7 +115,7 @@ const BusinessMapUpdate: React.FC<{
         <div className={`${emptyClass} flex items-end justify-end`}>
           <button
             type="submit"
-            disabled={!title || !latitude || !longitude}
+            disabled={title === "" || latitude === "" || longitude === ""}
             className="mb-0 w-full bg-blue-400 hover:bg-blue-500 text-white font-bold p-2 my-4 border border-blue-500 rounded disabled:opacity-50"
           >
             {updating ? "Updating..." : "Update"}

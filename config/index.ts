@@ -1,5 +1,6 @@
 const config = () => {
   let GRAPHQL_URL = process.env.NEXT_PUBLIC_GRAPHQL_URL
+  const GALOY_AUTH_ENDPOINT = process.env.NEXT_PUBLIC_GALOY_AUTH_ENDPOINT
 
   if (!GRAPHQL_URL) {
     if (typeof window === "undefined") {
@@ -14,6 +15,7 @@ const config = () => {
   }
   return {
     GRAPHQL_URL,
+    GALOY_AUTH_ENDPOINT,
   }
 }
 

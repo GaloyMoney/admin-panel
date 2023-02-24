@@ -29,7 +29,7 @@ const AuthCodeForm: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) => {
         credentials: "include",
       })
       if (loginResp instanceof Error) return reportError(loginResp)
-      window.sessionStorage.setItem("token", "fakeToken")
+      window.sessionStorage.setItem("token", "loggedInWithCookie")
       router.push("/account")
     } catch (e) {
       return reportError({

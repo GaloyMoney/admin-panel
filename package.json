@@ -14,7 +14,7 @@
     "tsc:check": "tsc --pretty --noEmit --skipLibCheck"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.12",
+    "@apollo/client": "^3.7.14",
     "@next/font": "13.3.1",
     "@svgr/webpack": "^6.5.1",
     "graphql": "^16.6.0",

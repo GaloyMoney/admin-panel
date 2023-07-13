@@ -26,7 +26,9 @@ const Details: React.FC<{
       </div>
       <div>
         <p className="mb-4 font-semibold text-gray-600">Email verified</p>
-        <p className={`text-gray-600 ${emptyClass}`}>{data?.owner?.email?.verified}</p>
+        <p className={`text-gray-600 ${emptyClass}`}>
+          {String(data?.owner?.email?.verified)}
+        </p>
       </div>
       <div>
         <p className="mb-4 font-semibold text-gray-600">Username</p>

@@ -130,12 +130,11 @@ const CaptchaChallenge: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) =>
   const isLoading = captchaState.status === "loading" || createLoading || requestLoading
   const hasError = !isLoading && captchaState.status === "error"
 
-  const resetPage = () => {
-    clearCookies().finally(() => {
-      localStorage.clear()
-      sessionStorage.clear()
-      window.location.href = "/"
-    })
+  const resetPage = async () => {
+    await clearCookies()
+    localStorage.clear()
+    sessionStorage.clear()
+    window.location.href = "/"
   }
 
   const clearCookies = () => {

@@ -12,7 +12,7 @@ import config from "../config"
 function SideBar() {
   const router = useRouter()
   const { GALOY_AUTH_ENDPOINT } = config()
-  const logout =  async () => {
+  const logout = async () => {
     await fetch(GALOY_AUTH_ENDPOINT + "/logout")
     clearCookies()
   }

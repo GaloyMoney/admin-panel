@@ -80,10 +80,6 @@ const CaptchaChallenge: React.FC<{ phoneNumber: string }> = ({ phoneNumber }) =>
     const initCaptcha = async () => {
       try {
         await clearCookies()
-      } catch (e) {
-        console.debug("[Init captcha err]:", "no cookies to clear")
-      }
-      try {
         const { data, errors } = await createCaptchaChallenge()
 
         const gqlErrors = errors ?? data?.captchaCreateChallenge?.errors

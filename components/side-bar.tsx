@@ -12,21 +12,19 @@ import config from "../config"
 function SideBar() {
   const router = useRouter()
   const { GALOY_AUTH_ENDPOINT } = config()
-  const logout = () => {
-    fetch(GALOY_AUTH_ENDPOINT + "/logout").finally(() => {
-      clearCookies()
-    })
+  const logout =  async () => {
+    await fetch(GALOY_AUTH_ENDPOINT + "/logout")
+    clearCookies()
   }
-  const clearCookies = () => {
-    fetch(GALOY_AUTH_ENDPOINT + "/clearCookies", {
+  const clearCookies = async () => {
+    await fetch(GALOY_AUTH_ENDPOINT + "/clearCookies", {
       method: "GET",
       redirect: "follow",
       credentials: "include",
-    }).finally(() => {
-      localStorage.clear()
-      sessionStorage.clear()
-      window.location.href = "/"
     })
+    localStorage.clear()
+    sessionStorage.clear()
+    window.location.href = "/"
   }
   return (
     <aside className="z-30 flex-shrink-0 hidden w-64 overflow-y-auto bg-white lg:block">

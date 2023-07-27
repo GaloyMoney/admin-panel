@@ -113,6 +113,7 @@ export type AuthTokenPayload = {
   readonly __typename: 'AuthTokenPayload';
   readonly authToken?: Maybe<Scalars['AuthToken']['output']>;
   readonly errors: ReadonlyArray<Error>;
+  readonly totpRequired?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /** A wallet belonging to an account which contains a BTC balance and a list of transactions. */

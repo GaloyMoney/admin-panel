@@ -47,8 +47,6 @@ export type Scalars = {
   SignedAmount: { input: number; output: number; }
   /** A string amount (of a currency) that can be negative (e.g. in a transaction) */
   SignedDisplayMajorAmount: { input: string; output: string; }
-  /** (Positive) Number of blocks in which the transaction is expected to be confirmed */
-  TargetConfirmations: { input: number; output: number; }
   /** Timestamp field, serialized as Unix time (the number of seconds since the Unix epoch) */
   Timestamp: { input: number; output: number; }
   /** Unique identifier of a user */
@@ -69,6 +67,7 @@ export type Account = {
   readonly status: AccountStatus;
   readonly title?: Maybe<Scalars['String']['output']>;
   readonly username?: Maybe<Scalars['Username']['output']>;
+  readonly uuid: Scalars['String']['output'];
   readonly wallets: ReadonlyArray<Wallet>;
 };
 
@@ -103,10 +102,6 @@ export type AccountUpdateStatusInput = {
   readonly comment?: InputMaybe<Scalars['String']['input']>;
   readonly status: AccountStatus;
   readonly uid: Scalars['ID']['input'];
-};
-
-export type AccountsAddUsdWalletInput = {
-  readonly accountIds: ReadonlyArray<Scalars['ID']['input']>;
 };
 
 export type AuthTokenPayload = {
@@ -181,12 +176,6 @@ export type CaptchaRequestAuthCodeInput = {
   readonly phone: Scalars['Phone']['input'];
   readonly secCode: Scalars['String']['input'];
   readonly validationCode: Scalars['String']['input'];
-};
-
-export type ColdStorageRebalanceToHotWalletInput = {
-  readonly amount: Scalars['SatAmount']['input'];
-  readonly targetConfirmations?: InputMaybe<Scalars['TargetConfirmations']['input']>;
-  readonly walletName: Scalars['String']['input'];
 };
 
 export type Coordinates = {
@@ -267,13 +256,10 @@ export type Mutation = {
   readonly __typename: 'Mutation';
   readonly accountUpdateLevel: AccountDetailPayload;
   readonly accountUpdateStatus: AccountDetailPayload;
-  /** @deprecated All accounts have USD wallets by default */
-  readonly accountsAddUsdWallet?: Maybe<WalletDetailsPayload>;
   readonly businessDeleteMapInfo: AccountDetailPayload;
   readonly businessUpdateMapInfo: AccountDetailPayload;
   readonly captchaCreateChallenge: CaptchaCreateChallengePayload;
   readonly captchaRequestAuthCode: SuccessPayload;
-  readonly coldStorageRebalanceToHotWallet: PsbtDetailPayload;
   readonly userLogin: AuthTokenPayload;
   readonly userRequestAuthCode: SuccessPayload;
   readonly userUpdatePhone: AccountDetailPayload;
@@ -290,11 +276,6 @@ export type MutationAccountUpdateStatusArgs = {
 };
 
 
-export type MutationAccountsAddUsdWalletArgs = {
-  input: AccountsAddUsdWalletInput;
-};
-
-
 export type MutationBusinessDeleteMapInfoArgs = {
   input: BusinessDeleteMapInfoInput;
 };
@@ -307,11 +288,6 @@ export type MutationBusinessUpdateMapInfoArgs = {
 
 export type MutationCaptchaRequestAuthCodeArgs = {
   input: CaptchaRequestAuthCodeInput;
-};
-
-
-export type MutationColdStorageRebalanceToHotWalletArgs = {
-  input: ColdStorageRebalanceToHotWalletInput;
 };
 
 
@@ -364,18 +340,6 @@ export type PriceOfOneSettlementMinorUnitInDisplayMinorUnit = PriceInterface & {
   /** @deprecated Deprecated please use `base / 10^offset` */
   readonly formattedAmount: Scalars['String']['output'];
   readonly offset: Scalars['Int']['output'];
-};
-
-export type PsbtDetail = {
-  readonly __typename: 'PsbtDetail';
-  readonly fee: Scalars['SatAmount']['output'];
-  readonly transaction: Scalars['String']['output'];
-};
-
-export type PsbtDetailPayload = {
-  readonly __typename: 'PsbtDetailPayload';
-  readonly errors: ReadonlyArray<Error>;
-  readonly psbtDetail?: Maybe<PsbtDetail>;
 };
 
 export type Query = {
@@ -579,8 +543,8 @@ export type UserRequestAuthCodeInput = {
 };
 
 export type UserUpdatePhoneInput = {
+  readonly accountId: Scalars['ID']['input'];
   readonly phone: Scalars['Phone']['input'];
-  readonly uid: Scalars['ID']['input'];
 };
 
 /** A generic wallet which stores value in one of our supported currencies. */
@@ -627,12 +591,6 @@ export const WalletCurrency = {
 } as const;
 
 export type WalletCurrency = typeof WalletCurrency[keyof typeof WalletCurrency];
-export type WalletDetailsPayload = {
-  readonly __typename: 'WalletDetailsPayload';
-  readonly errors: ReadonlyArray<Error>;
-  readonly walletDetails: ReadonlyArray<Wallet>;
-};
-
 export type AccountDetailsByUserPhoneQueryVariables = Exact<{
   phone: Scalars['Phone']['input'];
 }>;

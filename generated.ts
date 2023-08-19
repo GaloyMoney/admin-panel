@@ -596,14 +596,14 @@ export type AccountDetailsByUserPhoneQueryVariables = Exact<{
 }>;
 
 
-export type AccountDetailsByUserPhoneQuery = { readonly __typename: 'Query', readonly accountDetailsByUserPhone: { readonly __typename: 'Account', readonly id: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } };
+export type AccountDetailsByUserPhoneQuery = { readonly __typename: 'Query', readonly accountDetailsByUserPhone: { readonly __typename: 'Account', readonly id: string, readonly uuid: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } };
 
 export type AccountDetailsByEmailQueryVariables = Exact<{
   email: Scalars['EmailAddress']['input'];
 }>;
 
 
-export type AccountDetailsByEmailQuery = { readonly __typename: 'Query', readonly accountDetailsByEmail: { readonly __typename: 'Account', readonly id: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } };
+export type AccountDetailsByEmailQuery = { readonly __typename: 'Query', readonly accountDetailsByEmail: { readonly __typename: 'Account', readonly id: string, readonly uuid: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } };
 
 export type BusinessDeleteMapInfoMutationVariables = Exact<{
   input: BusinessDeleteMapInfoInput;
@@ -617,28 +617,28 @@ export type AccountUpdateLevelMutationVariables = Exact<{
 }>;
 
 
-export type AccountUpdateLevelMutation = { readonly __typename: 'Mutation', readonly accountUpdateLevel: { readonly __typename: 'AccountDetailPayload', readonly errors: ReadonlyArray<{ readonly __typename: 'GraphQLApplicationError', readonly message: string }>, readonly accountDetails?: { readonly __typename: 'Account', readonly id: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } | null } };
+export type AccountUpdateLevelMutation = { readonly __typename: 'Mutation', readonly accountUpdateLevel: { readonly __typename: 'AccountDetailPayload', readonly errors: ReadonlyArray<{ readonly __typename: 'GraphQLApplicationError', readonly message: string }>, readonly accountDetails?: { readonly __typename: 'Account', readonly id: string, readonly uuid: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } | null } };
 
 export type BusinessUpdateMapInfoMutationVariables = Exact<{
   input: BusinessUpdateMapInfoInput;
 }>;
 
 
-export type BusinessUpdateMapInfoMutation = { readonly __typename: 'Mutation', readonly businessUpdateMapInfo: { readonly __typename: 'AccountDetailPayload', readonly errors: ReadonlyArray<{ readonly __typename: 'GraphQLApplicationError', readonly message: string }>, readonly accountDetails?: { readonly __typename: 'Account', readonly id: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } | null } };
+export type BusinessUpdateMapInfoMutation = { readonly __typename: 'Mutation', readonly businessUpdateMapInfo: { readonly __typename: 'AccountDetailPayload', readonly errors: ReadonlyArray<{ readonly __typename: 'GraphQLApplicationError', readonly message: string }>, readonly accountDetails?: { readonly __typename: 'Account', readonly id: string, readonly uuid: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } | null } };
 
 export type AccountUpdateStatusMutationVariables = Exact<{
   input: AccountUpdateStatusInput;
 }>;
 
 
-export type AccountUpdateStatusMutation = { readonly __typename: 'Mutation', readonly accountUpdateStatus: { readonly __typename: 'AccountDetailPayload', readonly errors: ReadonlyArray<{ readonly __typename: 'GraphQLApplicationError', readonly message: string }>, readonly accountDetails?: { readonly __typename: 'Account', readonly id: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } | null } };
+export type AccountUpdateStatusMutation = { readonly __typename: 'Mutation', readonly accountUpdateStatus: { readonly __typename: 'AccountDetailPayload', readonly errors: ReadonlyArray<{ readonly __typename: 'GraphQLApplicationError', readonly message: string }>, readonly accountDetails?: { readonly __typename: 'Account', readonly id: string, readonly uuid: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } | null } };
 
 export type AccountDetailsByUsernameQueryVariables = Exact<{
   username: Scalars['Username']['input'];
 }>;
 
 
-export type AccountDetailsByUsernameQuery = { readonly __typename: 'Query', readonly accountDetailsByUsername: { readonly __typename: 'Account', readonly id: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } };
+export type AccountDetailsByUsernameQuery = { readonly __typename: 'Query', readonly accountDetailsByUsername: { readonly __typename: 'Account', readonly id: string, readonly uuid: string, readonly username?: string | null, readonly level: AccountLevel, readonly status: AccountStatus, readonly title?: string | null, readonly createdAt: number, readonly owner: { readonly __typename: 'User', readonly id: string, readonly language: string, readonly phone?: string | null, readonly createdAt: number, readonly email?: { readonly __typename: 'Email', readonly address?: string | null, readonly verified?: boolean | null } | null }, readonly coordinates?: { readonly __typename: 'Coordinates', readonly latitude: number, readonly longitude: number } | null, readonly wallets: ReadonlyArray<{ readonly __typename: 'BTCWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number } | { readonly __typename: 'UsdWallet', readonly id: string, readonly walletCurrency: WalletCurrency, readonly accountId: string, readonly balance: number, readonly pendingIncomingBalance: number }> } };
 
 export type CaptchaCreateChallengeMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -685,6 +685,7 @@ export const AccountDetailsByUserPhoneDocument = gql`
     query accountDetailsByUserPhone($phone: Phone!) {
   accountDetailsByUserPhone(phone: $phone) {
     id
+    uuid
     username
     level
     status
@@ -746,6 +747,7 @@ export const AccountDetailsByEmailDocument = gql`
     query accountDetailsByEmail($email: EmailAddress!) {
   accountDetailsByEmail(email: $email) {
     id
+    uuid
     username
     level
     status
@@ -846,6 +848,7 @@ export const AccountUpdateLevelDocument = gql`
     }
     accountDetails {
       id
+      uuid
       username
       level
       status
@@ -910,6 +913,7 @@ export const BusinessUpdateMapInfoDocument = gql`
     }
     accountDetails {
       id
+      uuid
       username
       level
       status
@@ -974,6 +978,7 @@ export const AccountUpdateStatusDocument = gql`
     }
     accountDetails {
       id
+      uuid
       username
       level
       status
@@ -1034,6 +1039,7 @@ export const AccountDetailsByUsernameDocument = gql`
     query accountDetailsByUsername($username: Username!) {
   accountDetailsByUsername(username: $username) {
     id
+    uuid
     username
     level
     status

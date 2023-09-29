@@ -27,7 +27,7 @@ export type TransactionListType =
 const isValidHash = (hash: string) => hash && hash.match(/^[a-f0-9]{64}$/i)
 const isValidTxId = (id: string) => id && id.match(/^[0-9a-fA-F]{24}$/i)
 
-function TransactionDetails() {
+export default function Transaction() {
   const [data, setData] = useState<null | TransactionListType>(null)
   const [payment, setPayment] = useState<null | LightningPayment>(null)
   const [invoice, setInvoice] = useState<null | LightningInvoice>(null)
@@ -164,8 +164,4 @@ function TransactionDetails() {
       </div>
     </>
   )
-}
-
-export default function Transactions() {
-  return <TransactionDetails />
 }

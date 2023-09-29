@@ -1,5 +1,4 @@
-// These styles apply to every route in the application
-import "../styles/main.css"
+import "./globals.css"
 
 import { Metadata } from "next"
 import { ApolloWrapper } from "./graphql"
@@ -11,6 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const year = new Date().getFullYear()
   return (
     <html lang="en">
       {/* <Script src="/gt.js" /> */}
@@ -27,6 +27,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
           </div>
         </div>
+        <footer className="w-full p-4 fixed bottom-0">
+          <p className="text-center text-gray-500 text-xs">&copy;{year} Galoy Inc.</p>
+        </footer>
       </body>
     </html>
   )

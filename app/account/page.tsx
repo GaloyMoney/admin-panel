@@ -29,7 +29,7 @@ export type AccountBusinessInfo = {
   coordinates: Omit<Coordinates, "__typename">
 }
 
-function AccountDetails() {
+export default function Account() {
   const [data, setData] = useState<null | AuditedAccount>(null)
   const [searchValue, setSearchValue] = useState("")
 
@@ -216,8 +216,4 @@ function AccountDetails() {
       )}
     </>
   )
-}
-
-export default function Account() {
-  return <AccountDetails />
 }

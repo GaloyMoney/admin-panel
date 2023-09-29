@@ -28,26 +28,20 @@ function SideBar() {
   return (
     <aside className="z-30 flex-shrink-0 hidden w-64 overflow-y-auto bg-white lg:block">
       <div className="py-4 text-gray-500">
-        <Link
-          className="ml-6 text-lg font-bold text-gray-800"
-          href="/account"
-          legacyBehavior
-        >
-          <>
-            <Image
-              src="/logo.png"
-              alt="Bitcoin Beach logo"
-              className="w-9 inline filter invert"
-              width={81}
-              height={76}
-              priority={true}
-              style={{
-                maxWidth: "100%",
-                height: "auto",
-              }}
-            />{" "}
-            Admin Panel
-          </>
+        <Link className="ml-6 text-lg font-bold text-gray-800" href="/account">
+          <Image
+            src="/logo.png"
+            alt="Bitcoin Beach logo"
+            className="w-9 inline filter invert"
+            width={81}
+            height={76}
+            priority={true}
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+            }}
+          />{" "}
+          Admin Panel
         </Link>
         <ul className="mt-6">
           {dashboardRoutes.map((route) => (
@@ -55,7 +49,6 @@ function SideBar() {
               <Link
                 href={route.path}
                 className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-                legacyBehavior
               >
                 <>
                   {router.pathname === route.path && (
@@ -82,7 +75,6 @@ function SideBar() {
           href="#"
           onClick={() => signOut()}
           className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-          legacyBehavior
         >
           <>
             <Image src={LogoutIcon} className="w-5 h-5" aria-hidden="true" alt="Logout" />

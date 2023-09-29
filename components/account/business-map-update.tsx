@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { AccountBusinessInfo } from "./index"
+import { AccountBusinessInfo } from "../../app/account/page"
 import { AuditedAccount } from "../../generated"
 
 const isValidLatitude = (latitude: number) =>

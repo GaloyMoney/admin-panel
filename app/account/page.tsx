@@ -1,13 +1,13 @@
+"use client"
+
 import { useState } from "react"
 
-import { useSession } from "next-auth/react"
 import { validEmail } from "../../utils"
-import Layout from "../layout"
 
-import SearchHeader from "../search-header"
-import Details from "./details"
-import AccountUpdate from "./update"
-import BusinessMapUpdate from "./business-map-update"
+import SearchHeader from "../../components/search-header"
+import Details from "../../components/account/details"
+import AccountUpdate from "../../components/account/update"
+import BusinessMapUpdate from "../../components/account/business-map-update"
 import { validPhone, validUsername, reportError } from "../../utils"
 
 import {
@@ -219,11 +219,5 @@ function AccountDetails() {
 }
 
 export default function Account() {
-  const { data: session, status } = useSession()
-
-  return (
-    <Layout>
-      <AccountDetails />
-    </Layout>
-  )
+  return <AccountDetails />
 }

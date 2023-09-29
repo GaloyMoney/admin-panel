@@ -1,21 +1,23 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/router"
-
-import Icon from "./icon"
-import { IconType } from "./icons"
+import { useRouter } from "next/navigation"
+import PeopleIcon from "./icons/people.svg"
+import TransactionsIcon from "./icons/transactions.svg"
+import LogoutIcon from "./icons/logout.svg"
 
 import { signOut } from "next-auth/react"
 
 const dashboardRoutes = [
   {
     name: "Account details",
-    icon: "PeopleIcon",
+    icon: PeopleIcon,
     path: "/account",
   },
   {
     name: "Transactions",
-    icon: "TransactionsIcon",
+    icon: TransactionsIcon,
     path: "/transactions",
   },
 ]
@@ -29,19 +31,23 @@ function SideBar() {
         <Link
           className="ml-6 text-lg font-bold text-gray-800"
           href="/account"
-          legacyBehavior>
-          <Image
-            src="/logo.png"
-            alt="Bitcoin Beach logo"
-            className="w-9 inline filter invert"
-            width={81}
-            height={76}
-            priority={true}
-            style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />{" "}
-          Admin Panel
+          legacyBehavior
+        >
+          <>
+            <Image
+              src="/logo.png"
+              alt="Bitcoin Beach logo"
+              className="w-9 inline filter invert"
+              width={81}
+              height={76}
+              priority={true}
+              style={{
+                maxWidth: "100%",
+                height: "auto",
+              }}
+            />{" "}
+            Admin Panel
+          </>
         </Link>
         <ul className="mt-6">
           {dashboardRoutes.map((route) => (
@@ -49,19 +55,23 @@ function SideBar() {
               <Link
                 href={route.path}
                 className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-                legacyBehavior>
-                {router.pathname === route.path && (
-                  <span
-                    className="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                legacyBehavior
+              >
+                <>
+                  {router.pathname === route.path && (
+                    <span
+                      className="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                      aria-hidden="true"
+                    ></span>
+                  )}
+                  <Image
+                    className="w-5 h-5"
                     aria-hidden="true"
-                  ></span>
-                )}
-                <Icon
-                  className="w-5 h-5"
-                  aria-hidden="true"
-                  icon={route.icon as IconType}
-                />
-                <span className="ml-4">{route.name}</span>
+                    src={route.icon}
+                    alt={route.name}
+                  />
+                  <span className="ml-4">{route.name}</span>
+                </>
               </Link>
             </li>
           ))}
@@ -72,13 +82,16 @@ function SideBar() {
           href="#"
           onClick={() => signOut()}
           className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-          legacyBehavior>
-          <Icon className="w-5 h-5" aria-hidden="true" icon="LogoutIcon" />
-          <span className="ml-4">Logout</span>
+          legacyBehavior
+        >
+          <>
+            <Image src={LogoutIcon} className="w-5 h-5" aria-hidden="true" alt="Logout" />
+            <span className="ml-4">Logout</span>
+          </>
         </Link>
       </div>
     </aside>
-  );
+  )
 }
 
 export default SideBar

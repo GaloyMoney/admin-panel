@@ -1,12 +1,7 @@
+"use client"
+
 import { useState } from "react"
 import { ApolloError } from "@apollo/client"
-
-import Layout from "../layout"
-
-import SearchHeader from "../search-header"
-import TransactionList from "./list"
-import LnPayment from "./ln-payment"
-import LnInvoice from "./ln-invoice"
 
 import { reportError } from "../../utils"
 import {
@@ -19,8 +14,11 @@ import {
   useTransactionByIdLazyQuery,
   useTransactionsByHashLazyQuery,
 } from "../../generated"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/router"
+
+import SearchHeader from "../../components/search-header"
+import LnPayment from "../../components/transactions/ln-payment"
+import LnInvoice from "../../components/transactions/ln-invoice"
+import TransactionList from "../../components/transactions/list"
 
 export type TransactionListType =
   | TransactionsByHashQuery["transactionsByHash"]
@@ -169,19 +167,5 @@ function TransactionDetails() {
 }
 
 export default function Transactions() {
-  const { data: session, status } = useSession()
-  const isAuthenticated = status === "authenticated"
-
-  const router = useRouter()
-
-  if (!isAuthenticated) {
-    // TODO server side redirection
-    router.push("/api/auth/signin")
-  }
-
-  return (
-    <Layout>
-      <TransactionDetails />
-    </Layout>
-  )
+  return <TransactionDetails />
 }

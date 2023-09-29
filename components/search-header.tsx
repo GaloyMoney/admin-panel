@@ -1,5 +1,6 @@
 import Header from "./header"
-import Icon from "./icon"
+import SearchIcon from "./icons/search.svg"
+import Image from "next/image"
 
 const SearchHeader: React.FC<{
   placeholder: string
@@ -17,7 +18,7 @@ const SearchHeader: React.FC<{
       <div className="flex justify-center flex-1 lg:mr-32">
         <div className="border rounded relative w-full max-w-xl p-2 focus-within:text-blue-500">
           <div className="absolute inset-y-0 flex items-center pl-2">
-            <Icon className="w-4 h-4" aria-hidden="true" icon="SearchIcon" />
+            <Image src={SearchIcon} alt="search" className="w-4 h-4" aria-hidden="true" />
           </div>
           <input
             id="search"

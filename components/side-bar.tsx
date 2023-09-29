@@ -1,4 +1,4 @@
-import Image from "next/legacy/image"
+import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
@@ -37,7 +37,10 @@ function SideBar() {
             width={81}
             height={76}
             priority={true}
-          />{" "}
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />{" "}
           Admin Panel
         </Link>
         <ul className="mt-6">

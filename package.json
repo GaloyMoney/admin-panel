@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.17",
-    "@next/font": "13.4.9",
     "@svgr/webpack": "^8.0.1",
     "graphql": "^16.7.1",
     "next": "^13.5.3",

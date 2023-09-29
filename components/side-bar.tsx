@@ -26,7 +26,10 @@ function SideBar() {
   return (
     <aside className="z-30 flex-shrink-0 hidden w-64 overflow-y-auto bg-white lg:block">
       <div className="py-4 text-gray-500">
-        <Link className="ml-6 text-lg font-bold text-gray-800" href="/account">
+        <Link
+          className="ml-6 text-lg font-bold text-gray-800"
+          href="/account"
+          legacyBehavior>
           <Image
             src="/logo.png"
             alt="Bitcoin Beach logo"
@@ -43,7 +46,7 @@ function SideBar() {
               <Link
                 href={route.path}
                 className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-              >
+                legacyBehavior>
                 {router.pathname === route.path && (
                   <span
                     className="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
@@ -66,13 +69,13 @@ function SideBar() {
           href="#"
           onClick={() => signOut()}
           className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-        >
+          legacyBehavior>
           <Icon className="w-5 h-5" aria-hidden="true" icon="LogoutIcon" />
           <span className="ml-4">Logout</span>
         </Link>
       </div>
     </aside>
-  )
+  );
 }
 
 export default SideBar

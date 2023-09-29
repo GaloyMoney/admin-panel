@@ -4,7 +4,7 @@ export function reportError(error: { message?: string }) {
 }
 
 export function validPhone(phone: string) {
-  return phone.length > 8 && phone.length <= 15 && phone.match(/^\+[1-9][0-9]{7,}$/)
+  return phone.length > 8 && phone.length <= 15 && phone.match(/^\+[1-9][0-9]{7,}$/);
 }
 
 export function validAuthCode(authCode: string) {
@@ -12,11 +12,11 @@ export function validAuthCode(authCode: string) {
 }
 
 export function validUsername(username: string) {
-  return username.length >= 3 && username.match(/(?!^(1|3|bc1|lnbc1))^[0-9a-z_]{3,50}$/i)
+  return username.length >= 3 && username.match(/(?!^(1|3|bc1|lnbc1))^[0-9a-z_]{3,50}$/i);
 }
 
 export function validEmail(email: string) {
-  return /^.+@\S+\.\S+$/.test(email)
+  return /^.+@\S+\.\S+$/.test(email);
 }
 
 export const formatDate = (timestamp: number) =>

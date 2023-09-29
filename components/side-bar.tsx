@@ -1,31 +1,28 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
 import Icon from "./icon"
-import { dashboardRoutes } from "../utils/routes"
 import { IconType } from "./icons"
-import config from "../config"
+
+import { signOut } from "next-auth/react"
+
+const dashboardRoutes = [
+  {
+    name: "Account details",
+    icon: "PeopleIcon",
+    path: "/account",
+  },
+  {
+    name: "Transactions",
+    icon: "TransactionsIcon",
+    path: "/transactions",
+  },
+]
 
 function SideBar() {
   const router = useRouter()
-  const { GALOY_AUTH_ENDPOINT } = config()
-  const logout = async () => {
-    await fetch(GALOY_AUTH_ENDPOINT + "/logout")
-    clearCookies()
-  }
-  const clearCookies = async () => {
-    await fetch(GALOY_AUTH_ENDPOINT + "/clearCookies", {
-      method: "GET",
-      redirect: "follow",
-      credentials: "include",
-    })
-    localStorage.clear()
-    sessionStorage.clear()
-    window.location.href = "/"
-  }
+
   return (
     <aside className="z-30 flex-shrink-0 hidden w-64 overflow-y-auto bg-white lg:block">
       <div className="py-4 text-gray-500">
@@ -67,7 +64,7 @@ function SideBar() {
       <div className="px-6 py-3 fixed bottom-0 text-gray-500">
         <Link
           href="#"
-          onClick={logout}
+          onClick={() => signOut()}
           className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
         >
           <Icon className="w-5 h-5" aria-hidden="true" icon="LogoutIcon" />

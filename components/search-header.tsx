@@ -1,5 +1,3 @@
-"use client"
-
 import Header from "./header"
 import Icon from "./icon"
 

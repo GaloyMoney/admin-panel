@@ -1,13 +1,19 @@
-"use client"
-
-import Login from "./login"
 import AccountDetails from "./account"
 
-import { isAuthenticated } from "../utils"
+import { useRouter } from "next/router"
+import { useSession } from "next-auth/react"
 
 function Home() {
-  if (!isAuthenticated()) {
-    return <Login />
+  const { data: session, status } = useSession()
+  const isAuthenticated = status === "authenticated"
+
+  console.log({ session, status })
+
+  const router = useRouter()
+
+  if (!isAuthenticated) {
+    // TODO server side redirection
+    router.push("/api/auth/signin")
   }
 
   return <AccountDetails />

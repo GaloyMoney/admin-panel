@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { AccountBusinessInfo } from "./index"
 import { AuditedAccount } from "../../generated"

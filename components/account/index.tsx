@@ -1,9 +1,7 @@
-"use client"
-
 import { useState } from "react"
 
-import Login from "../login"
-import { isAuthenticated, validEmail } from "../../utils"
+import { useSession } from "next-auth/react"
+import { validEmail } from "../../utils"
 import Layout from "../layout"
 
 import SearchHeader from "../search-header"
@@ -221,9 +219,7 @@ function AccountDetails() {
 }
 
 export default function Account() {
-  if (!isAuthenticated()) {
-    return <Login />
-  }
+  const { data: session, status } = useSession()
 
   return (
     <Layout>

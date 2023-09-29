@@ -1,5 +1,3 @@
-"use client"
-
 import { TransactionListType } from "."
 import { formatDate, formatNumber } from "../../utils"
 

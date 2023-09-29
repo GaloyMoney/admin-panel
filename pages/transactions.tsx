@@ -1,5 +1,3 @@
-"use client"
-
 import dynamic from "next/dynamic"
 import config from "../config"
 const Transactions = dynamic(() => import("../components/transactions"), {

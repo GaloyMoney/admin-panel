@@ -7,11 +7,12 @@ import { onError } from "@apollo/client/link/error"
 import { ApolloLink } from "@apollo/client"
 
 import config from "../config"
+import { SessionProvider } from "next-auth/react"
 
 import "../styles/main.css"
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const { GRAPHQL_URL, GALOY_AUTH_ENDPOINT } = config()
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  const { GRAPHQL_URL } = config()
 
   const cache = new InMemoryCache()
   const httpLink = new HttpLink({ uri: GRAPHQL_URL, fetch, credentials: "include" })
@@ -28,17 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
 
   const errorLink = onError(({ networkError }) => {
-    if (networkError && networkError.message.includes("Failed to fetch")) {
-      fetch(GALOY_AUTH_ENDPOINT + "/clearCookies", {
-        method: "GET",
-        redirect: "follow",
-        credentials: "include",
-      }).then(() => {
-        localStorage.clear()
-        sessionStorage.clear()
-        window.location.replace("/")
-      })
-    }
+    console.log({ networkError })
+    // signout?
   })
 
   const client = new ApolloClient({
@@ -64,9 +56,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#000000" />
         <meta name="description" content="Galoy admin panel" />
       </Head>
-      <ApolloProvider client={client}>
-        <Component {...pageProps} />
-      </ApolloProvider>
+      <SessionProvider session={session}>
+        <ApolloProvider client={client}>
+          <Component {...pageProps} />
+        </ApolloProvider>
+      </SessionProvider>
     </>
   )
 }

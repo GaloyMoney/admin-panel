@@ -19,16 +19,6 @@ export function validEmail(email: string) {
   return /^.+@\S+\.\S+$/.test(email)
 }
 
-export const logout = () => {
-  window.sessionStorage.clear()
-  window.location.href = "/"
-}
-
-export const isAuthenticated = () => {
-  if (typeof window === "undefined") return false
-  return Boolean(window.sessionStorage.getItem("token"))
-}
-
 export const formatDate = (timestamp: number) =>
   new Date(timestamp * 1e3).toLocaleString()
 

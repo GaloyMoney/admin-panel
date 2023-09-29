@@ -1,5 +1,3 @@
-"use client"
-
 import SideBar from "./side-bar"
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

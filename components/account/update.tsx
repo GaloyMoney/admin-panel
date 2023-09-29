@@ -1,5 +1,3 @@
-"use client"
-
 import { AuditedAccount } from "../../generated"
 
 type PropType = {

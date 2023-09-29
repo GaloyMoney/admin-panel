@@ -1,5 +1,3 @@
-"use client"
-
 const Header: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <header className="z-40 py-4 bg-white shadow-bottom">

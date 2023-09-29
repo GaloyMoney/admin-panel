@@ -1,10 +1,5 @@
-"use client"
-
-import dynamic from "next/dynamic"
 import config from "../config"
-const Account = dynamic(() => import("../components/account"), {
-  ssr: false,
-})
+import Account from "../components/account"
 
 export async function getServerSideProps() {
   const publicConfig = config()

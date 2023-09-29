@@ -1,5 +1,3 @@
-"use client"
-
 import { LightningInvoice } from "../../generated"
 import { formatDate } from "../../utils"
 

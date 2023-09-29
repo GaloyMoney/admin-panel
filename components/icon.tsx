@@ -1,5 +1,3 @@
-"use client"
-
 import Icons, { IconType } from "./icons"
 
 const Icon: React.FC<{ icon: IconType; className?: string }> = ({

@@ -1,5 +1,3 @@
-"use client"
-
 import { LightningPayment, LnPaymentStatus } from "../../generated"
 import { formatDate } from "../../utils"
 

@@ -1,7 +1,4 @@
-import {
-  LightningInvoiceDocument,
-  LightningInvoiceQuery
-} from "../../../../generated"
+import { LightningInvoiceDocument, LightningInvoiceQuery } from "../../../../generated"
 
 import LnInvoice from "../../../../components/transactions/ln-invoice"
 import { getClient } from "../../../graphql-rsc"

@@ -153,7 +153,7 @@
   var normalizeDomain = function (domain) {
     // special domain: uems.sysu.edu.cn/jwxt/geetest/
     // return domain.replace(/^https?:\/\/|\/.*$/g, ''); uems.sysu.edu.cn
-    return domain.replace(/^https?:\/\/|\/$/g, ""); // uems.sysu.edu.cn/jwxt/geetest
+    return domain.replace(/^https?:\/\/|\/$/g, "") // uems.sysu.edu.cn/jwxt/geetest
   }
   var normalizePath = function (path) {
     path = path.replace(/\/+/g, "/")
@@ -175,7 +175,7 @@
     if (q === "?") {
       q = ""
     }
-    return q.replace(/&$/, "");
+    return q.replace(/&$/, "")
   }
   var makeURL = function (protocol, domain, path, query) {
     domain = normalizeDomain(domain)

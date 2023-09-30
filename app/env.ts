@@ -9,7 +9,7 @@ export const env = createEnv({
   server: {
     GOOGLE_CLIENT_ID: z.string().min(1),
     GOOGLE_CLIENT_SECRET: z.string().min(1),
-    CORE_URL: z.string().url(),
+    ADMIN_CORE_API: z.string().url(),
     NEXTAUTH_URL: z.string().url(),
     NEXTAUTH_SECRET: z.string().min(8),
   },
@@ -28,7 +28,7 @@ export const env = createEnv({
   runtimeEnv: {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    CORE_URL: process.env.CORE_URL,
+    ADMIN_CORE_API: process.env.ADMIN_CORE_API,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },

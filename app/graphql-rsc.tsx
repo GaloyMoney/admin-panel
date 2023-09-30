@@ -13,7 +13,7 @@ export const { getClient } = registerApolloClient(() => {
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
     link: new HttpLink({
-      uri: env.CORE_URL,
+      uri: env.ADMIN_CORE_API,
 
       fetchOptions: { cache: "no-store" },
       headers: {

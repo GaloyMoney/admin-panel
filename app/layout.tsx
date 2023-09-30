@@ -1,7 +1,6 @@
 import "./globals.css"
 
 import { Metadata } from "next"
-import { ApolloWrapper } from "./graphql"
 import SideBar from "../components/side-bar"
 
 export const metadata: Metadata = {
@@ -20,10 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SideBar />
           <div className="flex flex-col flex-1 w-full">
             <main className="h-full overflow-y-auto">
-              <div className="container grid mx-auto">
-                {" "}
-                <ApolloWrapper>{children}</ApolloWrapper>
-              </div>
+              <div className="container grid mx-auto">{children}</div>
             </main>
           </div>
         </div>

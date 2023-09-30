@@ -7,10 +7,6 @@ export function validPhone(phone: string) {
   return phone.length > 8 && phone.length <= 15 && phone.match(/^\+[1-9][0-9]{7,}$/);
 }
 
-export function validAuthCode(authCode: string) {
-  return authCode.length === 6
-}
-
 export function validUsername(username: string) {
   return username.length >= 3 && username.match(/(?!^(1|3|bc1|lnbc1))^[0-9a-z_]{3,50}$/i);
 }

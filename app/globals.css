@@ -62,3 +62,11 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+input:invalid {
+  border-color: #f56565;
+}
+
+input {
+  border-color: #00ff00; 
+}

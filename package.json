@@ -25,7 +25,7 @@
     "@opentelemetry/instrumentation-http": "^0.44.0",
     "@opentelemetry/instrumentation-net": "^0.32.2",
     "@opentelemetry/resources": "^1.17.1",
-    "@opentelemetry/sdk-node": "^0.44.0",
+    "@opentelemetry/sdk-node": "^0.45.1",
     "@opentelemetry/sdk-trace-node": "^1.17.1",
     "@opentelemetry/semantic-conventions": "^1.17.1",
     "@svgr/webpack": "^8.1.0",

@@ -22,7 +22,7 @@
     "@opentelemetry/api": "^1.6.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.44.0",
     "@opentelemetry/instrumentation-graphql": "^0.35.2",
-    "@opentelemetry/instrumentation-http": "^0.44.0",
+    "@opentelemetry/instrumentation-http": "^0.48.0",
     "@opentelemetry/instrumentation-net": "^0.32.2",
     "@opentelemetry/resources": "^1.17.1",
     "@opentelemetry/sdk-node": "^0.48.0",
